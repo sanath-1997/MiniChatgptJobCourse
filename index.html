@@ -680,6 +680,46 @@
       transform: translateY(-2px);
     }
 
+    .desktop-copy-panel {
+      display: none;
+      margin-bottom: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--soft-gray);
+      background: var(--off-white);
+      text-align: center;
+    }
+
+    .desktop-copy-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease forwards;
+    }
+
+    .desktop-copy-panel p {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .copy-link-btn {
+      width: 100%;
+      border: 1px solid var(--soft-gray);
+      background: var(--white);
+      color: var(--dark-blue);
+      padding: 13px 15px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 800;
+      transition: 0.25s ease;
+    }
+
+    .copy-link-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue);
+    }
+
     .share-count {
       font-size: 14px;
       color: var(--text-muted);
@@ -824,9 +864,7 @@
         font-size: 38px;
       }
 
-      .share-grid {
-        grid-template-columns: 1fr;
-      }
+
     }
   </style>
 </head>
@@ -879,7 +917,7 @@
 
       <section>
         <div class="section-header">
-          <h2>What You Will Learn</h2>
+          <h2>What You Will Learn?</h2>
         </div>
 
         <div class="learn-card">
@@ -961,13 +999,18 @@
       </div>
 
       <!-- Replace this link with the actual payment link later -->
-      <a href="#" class="buy-btn" id="buyButton">Buy at ₹99</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" onclick="markPaymentClicked()">Buy at ₹99</a>
 
       <div class="discount-text">
         Get this at ₹14: Share this with 2 of your friends who are searching for jobs.
       </div>
 
-      <button class="discount-btn" onclick="nativeShare()">Get it at ₹14</button>
+      <button class="discount-btn" onclick="handleDiscountClick()">Get it at ₹14</button>
+
+      <div class="desktop-copy-panel" id="desktopCopyPanel">
+        <p>Desktop detected. Copy the link and share it with your friends.</p>
+        <button class="copy-link-btn" onclick="copyCourseLink()">🔗 Copy Link</button>
+      </div>
 
       <div class="share-count" id="shareCountText">
         Shared with 0 of 2 people
@@ -981,6 +1024,7 @@
 
   <script>
     const modal = document.getElementById("courseModal");
+    const desktopCopyPanel = document.getElementById("desktopCopyPanel");
     const shareCountText = document.getElementById("shareCountText");
     const successMessage = document.getElementById("successMessage");
     const priceText = document.getElementById("priceText");
@@ -990,14 +1034,12 @@
     let discountUnlocked = false;
 
     // Replace this message and link later
-    const shareMessage = "Hey 😊 I found this mini web course useful for job seekers.
-
-It explains how to use ChatGPT Agent Mode to search and apply for jobs faster while saving time. 🚀
-
-Link: https://www.youtube.com
-
-Note: This is not spam ✅";
+    const shareMessage = "Hey 😊 Learn how to automate ChatGPT to apply for jobs for you while you rest.\n\nLink: https://www.youtube.com\n\nNote: This is not spam ✅";
     const courseLink = "https://www.youtube.com";
+
+    function markPaymentClicked() {
+      localStorage.setItem("PaymentforMiniChatgptcourse", "true");
+    }
 
     function openModal() {
       modal.classList.add("active");
@@ -1005,6 +1047,19 @@ Note: This is not spam ✅";
 
     function closeModal() {
       modal.classList.remove("active");
+      desktopCopyPanel.classList.remove("active");
+    }
+
+    function isMobileOrTablet() {
+      return /Android|iPhone|iPad|iPod|Windows Phone|Mobile|Tablet/i.test(navigator.userAgent) || window.innerWidth <= 1024;
+    }
+
+    function handleDiscountClick() {
+      if (isMobileOrTablet() && navigator.share) {
+        nativeShare();
+      } else {
+        desktopCopyPanel.classList.add("active");
+      }
     }
 
     function recordShareAction() {
@@ -1069,11 +1124,11 @@ Note: This is not spam ✅";
     }
 
     function copyCourseLink() {
-      navigator.clipboard.writeText(courseLink).then(() => {
-        alert("Course link copied!");
+      navigator.clipboard.writeText(shareMessage).then(() => {
+        alert("DM message copied!");
         recordShareAction();
       }).catch(() => {
-        alert("Unable to copy link. Please copy it manually: " + courseLink);
+        alert("Unable to copy automatically. Please copy this message manually:\n\n" + shareMessage);
         recordShareAction();
       });
     }
@@ -1089,7 +1144,7 @@ Note: This is not spam ✅";
           alert("Sharing was cancelled.");
         });
       } else {
-        alert("Native sharing is not supported on this browser.");
+        desktopCopyPanel.classList.add("active");
       }
     }
 modal.addEventListener("click", function(event) {
