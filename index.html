@@ -703,19 +703,7 @@
     .success-msg.active {
       display: block;
     }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(34px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
@@ -723,12 +711,7 @@
         transition: none !important;
         scroll-behavior: auto !important;
       }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
+}
 
     @media (max-width: 980px) {
       header {
@@ -867,7 +850,7 @@
     </header>
 
     <main>
-      <section class="hero reveal">
+      <section class="hero">
         <div class="eyebrow">🤖 AI Job Search System</div>
 
         <h1>
@@ -894,12 +877,12 @@
         </div>
       </section>
 
-      <section class="reveal">
+      <section>
         <div class="section-header">
           <h2>What You Will Learn?</h2>
         </div>
 
-        <div class="learn-card reveal">
+        <div class="learn-card">
           <p class="learn-main-text">
             You will learn how to automate <span class="learn-highlight">ChatGPT in Agent Mode</span>
             to search for and apply to 100+ latest job openings that match your resume, while you simply
@@ -913,7 +896,7 @@
         </div>
       </section>
 
-      <section id="course-content" class="reveal">
+      <section id="course-content">
         <div class="section-header">
           <h2>What’s Inside This Mini-Course?</h2>
           <p>
@@ -922,28 +905,28 @@
         </div>
 
         <div class="course-grid">
-          <div class="course-card reveal">
+          <div class="course-card">
             <div class="card-icon">🎯</div>
             <div class="module-tag">Module 1</div>
             <h3>Find Suitable Roles</h3>
             <p>Identify job roles that are suitable for your resume, skills, and experience.</p>
           </div>
 
-          <div class="course-card reveal">
+          <div class="course-card">
             <div class="card-icon">📝</div>
             <div class="module-tag">Module 2</div>
             <h3>Improve Your Resume</h3>
             <p>Refine, improve, and customize your resume with ChatGPT for better job matching.</p>
           </div>
 
-          <div class="course-card reveal">
+          <div class="course-card">
             <div class="card-icon">🔎</div>
             <div class="module-tag">Module 3</div>
             <h3>Collect Job Openings</h3>
             <p>Find the latest job openings from LinkedIn and Indeed, then organize links in a spreadsheet.</p>
           </div>
 
-          <div class="course-card reveal">
+          <div class="course-card">
             <div class="card-icon">⚙️</div>
             <div class="module-tag">Module 4</div>
             <h3>Set Up Automation</h3>
@@ -952,8 +935,8 @@
         </div>
       </section>
 
-      <section class="cta-section reveal">
-        <div class="cta-box reveal">
+      <section class="cta-section">
+        <div class="cta-box">
           <h2>Ready to Speed Up Your Job Search?</h2>
           <p>Start learning the simple system to apply faster and stay organized.</p>
           <button class="primary-btn" onclick="openModal()">Get the Mini Web Course</button>
@@ -1007,7 +990,13 @@
     let discountUnlocked = false;
 
     // Replace this message and link later
-    const shareMessage = "Hey 😊 Learn how to automate ChatGPT to apply for jobs for you while you rest.\n\nLink: https://www.youtube.com\n\nNote: This is not spam ✅";
+    const shareMessage = "Hey 😊 I found this mini web course useful for job seekers.
+
+It explains how to use ChatGPT Agent Mode to search and apply for jobs faster while saving time. 🚀
+
+Link: https://www.youtube.com
+
+Note: This is not spam ✅";
     const courseLink = "https://www.youtube.com";
 
     function openModal() {
@@ -1103,25 +1092,7 @@
         alert("Native sharing is not supported on this browser.");
       }
     }
-
-    const revealElements = document.querySelectorAll(".reveal");
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.14
-    });
-
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
-
-    modal.addEventListener("click", function(event) {
+modal.addEventListener("click", function(event) {
       if (event.target === modal) {
         closeModal();
       }
