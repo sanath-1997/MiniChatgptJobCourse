@@ -999,7 +999,7 @@
       </div>
 
       <!-- Replace this link with the actual payment link later -->
-      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" onclick="markPaymentClicked()">Buy at ₹99</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" >Buy at ₹99</a>
 
       <div class="discount-text">
         Get this at ₹14: Share this with 2 of your friends who are searching for jobs.
@@ -1037,10 +1037,7 @@
     const shareMessage = "Hey 😊 Learn how to automate ChatGPT to apply for jobs for you while you rest.\n\nLink: https://www.youtube.com\n\nNote: This is not spam ✅";
     const courseLink = "https://www.youtube.com";
 
-    function markPaymentClicked() {
-      localStorage.setItem("PaymentforMiniChatgptcourse", "true");
-    }
-
+  
     function openModal() {
       modal.classList.add("active");
     }
