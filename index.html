@@ -999,7 +999,7 @@
       </div>
 
       <!-- Replace this link with the actual payment link later -->
-      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" >Buy at ₹99</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" onclick="markPaymentClicked()">Buy at ₹99</a>
 
       <div class="discount-text">
         Get this at ₹14: Share this with 2 of your friends who are searching for jobs.
@@ -1013,7 +1013,7 @@
       </div>
 
       <div class="share-count" id="shareCountText">
-        Shared with 0 of 2 people
+        Complete one share or copy action to unlock the offer.
       </div>
 
       <div class="success-msg" id="successMessage">
@@ -1037,7 +1037,10 @@
     const shareMessage = "Hey 😊 Learn how to automate ChatGPT to apply for jobs for you while you rest.\n\nLink: https://www.youtube.com\n\nNote: This is not spam ✅";
     const courseLink = "https://www.youtube.com";
 
-  
+    function markPaymentClicked() {
+      localStorage.setItem("PaymentforMiniChatgptcourse", "true");
+    }
+
     function openModal() {
       modal.classList.add("active");
     }
@@ -1064,13 +1067,13 @@
 
       shareCount++;
 
-      if (shareCount > 2) {
-        shareCount = 2;
+      if (shareCount > 1) {
+        shareCount = 1;
       }
 
-      shareCountText.textContent = `Shared with ${shareCount} of 2 people`;
+      shareCountText.textContent = "Discount action completed.";
 
-      if (shareCount >= 2) {
+      if (shareCount >= 1) {
         unlockDiscount();
       }
     }
@@ -1125,7 +1128,9 @@
         alert("DM message copied!");
         recordShareAction();
       }).catch(() => {
-        alert("Unable to copy automatically. Please copy this message manually:\n\n" + shareMessage);
+        alert("Unable to copy automatically. Please copy this message manually:
+
+" + shareMessage);
         recordShareAction();
       });
     }
