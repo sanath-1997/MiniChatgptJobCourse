@@ -999,7 +999,7 @@
       </div>
 
       <!-- Replace this link with the actual payment link later -->
-      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton">Buy at ₹99</a>
+      <a href="https://rzp.io/rzp/nJ0x8rub" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" onclick="markPaymentClicked()">Buy at ₹99</a>
 
       <div class="discount-text">
         Get this at ₹14: Share this with 1 friend who is searching for jobs.
@@ -1034,8 +1034,12 @@
     let discountUnlocked = false;
 
     // Replace this message and link later
-    const shareMessage = "Oi 😌,\n  Learn how to make ChatGPT apply for jobs for you while you rest. #Automate #MiniCourse \n\nLink 🔗: https://mini-chatgpt-job-course.vercel.app\n\nNote: This is not spam ✅";
+    const shareMessage = "Oi 🤨 ,\n\n  Learn how to make ChatGPT apply jobs for you while you rest 😍.\n #Automate #MiniCourse \n\nLink 🔗: https://mini-chatgpt-job-course.vercel.app\n\nNote: This is not spam ✅";
     const courseLink = "https://mini-chatgpt-job-course.vercel.app/";
+
+    function markPaymentClicked() {
+      localStorage.setItem("PaymentforMiniChatgptcourse", "true");
+    }
 
     function openModal() {
       modal.classList.add("active");
@@ -1079,6 +1083,7 @@
       animatePriceDrop(99, 14);
       successMessage.classList.add("active");
       buyButton.textContent = "Buy at ₹14";
+      buyButton.href = "https://rzp.io/rzp/8jgR83g6";
       priceText.classList.add("drop");
 
       setTimeout(() => {
