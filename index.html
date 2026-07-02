@@ -990,7 +990,7 @@
       <h3>Get the Mini Course 🚀</h3>
 
       <p class="modal-subtext">
-        Buy now or unlock a special discount by sharing it with two people.
+        Buy now or unlock a special discount by sharing it with one person.
       </p>
 
       <div class="price-display">
@@ -999,21 +999,21 @@
       </div>
 
       <!-- Replace this link with the actual payment link later -->
-      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton" onclick="markPaymentClicked()">Buy at ₹99</a>
+      <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buyButton">Buy at ₹99</a>
 
       <div class="discount-text">
-        Get this at ₹14: Share this with 2 of your friends who are searching for jobs.
+        Get this at ₹14: Share this with 1 friend who is searching for jobs.
       </div>
 
       <button class="discount-btn" onclick="handleDiscountClick()">Get it at ₹14</button>
 
       <div class="desktop-copy-panel" id="desktopCopyPanel">
-        <p>Desktop detected. Copy the link and share it with your friends.</p>
+        <p>Desktop detected. Copy the link and share it with one friend.</p>
         <button class="copy-link-btn" onclick="copyCourseLink()">🔗 Copy Link</button>
       </div>
 
       <div class="share-count" id="shareCountText">
-        Complete one share or copy action to unlock the offer.
+        Shared with 0 of 1 person
       </div>
 
       <div class="success-msg" id="successMessage">
@@ -1036,10 +1036,6 @@
     // Replace this message and link later
     const shareMessage = "Hey 😊 Learn how to automate ChatGPT to apply for jobs for you while you rest.\n\nLink: https://www.youtube.com\n\nNote: This is not spam ✅";
     const courseLink = "https://www.youtube.com";
-
-    function markPaymentClicked() {
-      localStorage.setItem("PaymentforMiniChatgptcourse", "true");
-    }
 
     function openModal() {
       modal.classList.add("active");
@@ -1071,7 +1067,7 @@
         shareCount = 1;
       }
 
-      shareCountText.textContent = "Discount action completed.";
+      shareCountText.textContent = `Shared with ${shareCount} of 1 person`;
 
       if (shareCount >= 1) {
         unlockDiscount();
@@ -1128,9 +1124,7 @@
         alert("DM message copied!");
         recordShareAction();
       }).catch(() => {
-        alert("Unable to copy automatically. Please copy this message manually:
-
-" + shareMessage);
+        alert("Unable to copy automatically. Please copy this message manually:\n\n" + shareMessage);
         recordShareAction();
       });
     }
